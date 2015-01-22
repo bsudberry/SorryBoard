@@ -20,13 +20,12 @@ public class GameBoard extends Canvas
 		
 		GameBoard canvas = new GameBoard();
 	    JFrame frame = new JFrame();
-	    frame.setSize(675, 697);
+	    frame.setSize(700, 900);
+	    frame.setLayout(new BorderLayout());
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.getContentPane().add(canvas);
+	    frame.getContentPane().add(canvas, BorderLayout.CENTER);
 	    frame.setResizable(false);
 	    frame.setVisible(true);
-	    GamePlay.gamePlay(PawnManager.p1Pawns);
-	   
 		}
 		
 
@@ -61,8 +60,7 @@ public class GameBoard extends Canvas
 		graphics.setColor(Color.yellow);
 		graphics.fillOval(540, 155, 90, 90);
 		graphics.setColor(purple);
-		graphics.fillOval(425, 540, 90, 90);
-		
+		graphics.fillOval(425, 540, 90, 90); 
 		for(int j=0; j<15; j++)
     		{
 			
@@ -84,7 +82,6 @@ public class GameBoard extends Canvas
         			}
         		}
     		}
-		
 		for(int j=0; j<15; j++)
 			{
 			u=630;
@@ -151,45 +148,45 @@ public class GameBoard extends Canvas
 	    		}
 			}
 		
-//		for(int i=0; i<4; i++)
-//			{
-//			if(i==0)
-//				{
-//				x.clear();
-//				 x = (p1Pawns);
-//				}
-//			else if(i==1)
-//				{
-//				x.clear();
-//				 x = (p2Pawns);
-//				}
-//			else if(i==2)
-//				{
-//				x.clear();
-//				 x = (p3Pawns);
-//				}
-//			else if(i==3)
-//				{
-//				x.clear();
-//				 x = (p4Pawns);
-//				}
-//			for(int z=0; z<4; z++)
-//				{
-//				Pawn p = x.get(z);
-//				if(p.getLoc() >0)
-//					{
-//					graphics.setColor(p.getColor());
-//					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
-//					graphics.setColor(Color.black); 
-//					graphics.drawString(String.valueOf(p.getpNum()), spaces.get(p.getLoc()).getxC()+19, spaces.get(p.getLoc()).getyC()+27); 
-//					}
-//				else
-//					{
-//					graphics.setColor(Color.blue);
-//					graphics.fillOval(p.getxHome(), p.getyHome(), 45, 45);
-//					}
-//				}
-//			}
+		for(int i=0; i<4; i++)
+			{
+			if(i==0)
+				{
+				x.clear();
+				 x = (p1Pawns);
+				}
+			else if(i==1)
+				{
+				x.clear();
+				 x = (p2Pawns);
+				}
+			else if(i==2)
+				{
+				x.clear();
+				 x = (p3Pawns);
+				}
+			else if(i==3)
+				{
+				x.clear();
+				 x = (p4Pawns);
+				}
+			for(int z=0; z<4; z++)
+				{
+				Pawn p = x.get(z);
+				if(p.getLoc() >0)
+					{
+					graphics.setColor(p.getColor());
+					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
+					graphics.setColor(Color.black); 
+					graphics.drawString(String.valueOf(p.getpNum()), spaces.get(p.getLoc()).getxC()+19, spaces.get(p.getLoc()).getyC()+27); 
+					}
+				else
+					{
+					graphics.setColor(Color.blue);
+					graphics.fillOval(p.getxHome(), p.getyHome(), 45, 45);
+					}
+				}
+			}
 		
 		graphics.setColor(Color.black); 
 		graphics.drawLine(90,90,135,90);
@@ -206,6 +203,12 @@ public class GameBoard extends Canvas
 		graphics.drawLine(135,540,135,585);
 		graphics.drawLine(180,540,180,585);
 		graphics.drawLine(225,540,225,585);
+		
+		graphics.drawLine(540,450,585,450);
+		graphics.drawLine(540,495,585,495);
+		graphics.drawLine(540,540,585,540);
+		graphics.drawLine(540,585,585,585);
+		
 		}
 	
 	public static void makeSpots()

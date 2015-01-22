@@ -8,11 +8,6 @@ import javax.swing.JLabel;         import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GamePlay 
-	{
-	
-	public static void gamePlay(ArrayList<Pawn> t)
-		{
-		
-		}
+{
 	}
 	
