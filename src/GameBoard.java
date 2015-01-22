@@ -151,45 +151,61 @@ public class GameBoard extends Canvas
 	    		}
 			}
 		
-		for(int i=0; i<4; i++)
-			{
-			if(i==0)
-				{
-				x.clear();
-				 x = (p1Pawns);
-				}
-			else if(i==1)
-				{
-				x.clear();
-				 x = (p2Pawns);
-				}
-			else if(i==2)
-				{
-				x.clear();
-				 x = (p3Pawns);
-				}
-			else if(i==3)
-				{
-				x.clear();
-				 x = (p4Pawns);
-				}
-			for(int z=0; z<4; z++)
-				{
-				Pawn p = x.get(z);
-				if(p.getLoc() >0)
-					{
-					graphics.setColor(p.getColor());
-					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
-					graphics.setColor(Color.black); 
-					graphics.drawString(String.valueOf(p.getpNum()), spaces.get(p.getLoc()).getxC()+19, spaces.get(p.getLoc()).getyC()+27); 
-					}
-				else
-					{
-					graphics.setColor(Color.blue);
-					graphics.fillOval(p.getxHome(), p.getyHome(), 45, 45);
-					}
-				}
-			}
+//		for(int i=0; i<4; i++)
+//			{
+//			if(i==0)
+//				{
+//				x.clear();
+//				 x = (p1Pawns);
+//				}
+//			else if(i==1)
+//				{
+//				x.clear();
+//				 x = (p2Pawns);
+//				}
+//			else if(i==2)
+//				{
+//				x.clear();
+//				 x = (p3Pawns);
+//				}
+//			else if(i==3)
+//				{
+//				x.clear();
+//				 x = (p4Pawns);
+//				}
+//			for(int z=0; z<4; z++)
+//				{
+//				Pawn p = x.get(z);
+//				if(p.getLoc() >0)
+//					{
+//					graphics.setColor(p.getColor());
+//					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
+//					graphics.setColor(Color.black); 
+//					graphics.drawString(String.valueOf(p.getpNum()), spaces.get(p.getLoc()).getxC()+19, spaces.get(p.getLoc()).getyC()+27); 
+//					}
+//				else
+//					{
+//					graphics.setColor(Color.blue);
+//					graphics.fillOval(p.getxHome(), p.getyHome(), 45, 45);
+//					}
+//				}
+//			}
+		
+		graphics.setColor(Color.black); 
+		graphics.drawLine(90,90,135,90);
+		graphics.drawLine(90,135,135,135);
+		graphics.drawLine(90,180,135,180);
+		graphics.drawLine(90,225,135,225);
+		
+		graphics.drawLine(450,90,450,135);
+		graphics.drawLine(495,90,495,135);
+		graphics.drawLine(540,90,540,135);
+		graphics.drawLine(585,90,585,135);
+		
+		graphics.drawLine(90,540,90,585);
+		graphics.drawLine(135,540,135,585);
+		graphics.drawLine(180,540,180,585);
+		graphics.drawLine(225,540,225,585);
 		}
 	
 	public static void makeSpots()
