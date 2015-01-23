@@ -1,8 +1,6 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.util.*; 
-import java.awt.Graphics2D;
 import java.io.File;
 import java.io.IOException;
 
@@ -20,6 +18,7 @@ public class GameBoard extends Canvas
 	static ArrayList<Pawn> p4Pawns = new ArrayList<Pawn>();
 	static Color purple = new Color(125, 38, 205); 
 	static ArrayList<Pawn> x = new ArrayList<Pawn>();
+	static ArrayList<String> cardsArray = new ArrayList<String>(); 
 	
 	public static void makeBoard()
 		{
@@ -39,7 +38,26 @@ public class GameBoard extends Canvas
 	    frame.setVisible(true);
 		}
 		
+public static void addCards()
+	{
+	cardsArray.add("SorryCard.jpg");
+	cardsArray.add("One.jpg");
+	cardsArray.add("Two.jpg");
+	cardsArray.add("Three.jpg");
+	cardsArray.add("Four.jpg");
+	cardsArray.add("Five.jpg");
+	cardsArray.add("Seven.jpg");
+	cardsArray.add("Eight.jpg"); 
+	cardsArray.add("Ten.jpg");
+	cardsArray.add("Eleven.jpg");
+	cardsArray.add("Twelve.jpg");
+	}
 
+public static int chooseCard()
+	{
+	int x = (int)(Math.random()*cardsArray.size());
+	return x;
+	}
 	
 	public static void acceptPawns(ArrayList<Pawn> one, ArrayList<Pawn> two, ArrayList<Pawn> three, ArrayList<Pawn> four)
 		{
@@ -51,9 +69,12 @@ public class GameBoard extends Canvas
 		p2Pawns = two; 
 		p3Pawns = three; 
 		p4Pawns = four; 
+		
 		}
 	public void paint(Graphics graphics) 
 	{
+	addCards(); 
+	chooseCard();
 		graphics.setColor(Color.black);
 		graphics.fillRect(45, 45, 585, 585);
 		graphics.setColor(Color.red);
@@ -181,22 +202,22 @@ public class GameBoard extends Canvas
 				x.clear();
 				 x = (p4Pawns);
 				}
-			for(int z=0; z<4; z++)
-				{
-				Pawn p = x.get(z);
-				if(p.getLoc() >0)
-					{
-					graphics.setColor(p.getColor());
-					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
-					graphics.setColor(Color.black); 
-					graphics.drawString(String.valueOf(p.getpNum()), spaces.get(p.getLoc()).getxC()+19, spaces.get(p.getLoc()).getyC()+27); 
-					}
-				else
-					{
-					graphics.setColor(Color.blue);
-					graphics.fillOval(p.getxHome(), p.getyHome(), 45, 45);
-					}
-				}
+//			for(int z=0; z<4; z++)
+//				{
+//				Pawn p = x.get(z);
+//				if(p.getLoc() >0)
+//					{
+//					graphics.setColor(p.getColor());
+//					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
+//					graphics.setColor(Color.black); 
+//					graphics.drawString(String.valueOf(p.getpNum()), spaces.get(p.getLoc()).getxC()+19, spaces.get(p.getLoc()).getyC()+27); 
+//					}
+//				else
+//					{
+//					graphics.setColor(Color.blue);
+//					graphics.fillOval(p.getxHome(), p.getyHome(), 45, 45);
+//					}
+//				}
 			}
 		
 		graphics.setColor(Color.black); 
@@ -222,10 +243,18 @@ public class GameBoard extends Canvas
 		
 		BufferedImage one = null;
 		try {
-		    one = ImageIO.read(new File("One.jpg"));
+		    one = ImageIO.read(new File(cardsArray.get(chooseCard())));
 		} catch (IOException e) {
 		}
-		graphics.drawImage(one, 250, 200, 200, 300, null);
+		graphics.drawImage(one, 240, 200, 200, 300, null);
+		try
+			{
+			Thread.sleep(500);
+			} catch (InterruptedException e)
+			{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
 		}
 	
 	public static void makeSpots()
