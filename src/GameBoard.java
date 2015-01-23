@@ -1,6 +1,12 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.util.*; 
+import java.awt.Graphics2D;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
  
 public class GameBoard extends Canvas
@@ -20,11 +26,16 @@ public class GameBoard extends Canvas
 		
 		GameBoard canvas = new GameBoard();
 	    JFrame frame = new JFrame();
+	    JPanel panel = new JPanel(); 
+	    JButton button = new JButton("Button");
+	    TextField x = new TextField();
+	    panel.add(x);
 	    frame.setSize(700, 900);
 	    frame.setLayout(new BorderLayout());
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.getContentPane().add(button, BorderLayout.SOUTH);
 	    frame.getContentPane().add(canvas, BorderLayout.CENTER);
-	    frame.setResizable(false);
+	    frame.setResizable(true);
 	    frame.setVisible(true);
 		}
 		
@@ -209,6 +220,12 @@ public class GameBoard extends Canvas
 		graphics.drawLine(540,540,585,540);
 		graphics.drawLine(540,585,585,585);
 		
+		BufferedImage one = null;
+		try {
+		    one = ImageIO.read(new File("One.jpg"));
+		} catch (IOException e) {
+		}
+		graphics.drawImage(one, 250, 200, 200, 300, null);
 		}
 	
 	public static void makeSpots()
