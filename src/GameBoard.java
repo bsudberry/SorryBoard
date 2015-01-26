@@ -1,14 +1,17 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.*; 
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
  
 public class GameBoard extends Canvas
 	{
+	static GameBoard canvas = new GameBoard();
+	
 	public static ArrayList<BoardSpace> spaces = new ArrayList<BoardSpace>(); 
 	private static final long	serialVersionUID	= 1L;
 	static int u, b, k; 
@@ -23,39 +26,32 @@ public class GameBoard extends Canvas
 	public static void makeBoard()
 		{
 		
-		GameBoard canvas = new GameBoard();
 	    JFrame frame = new JFrame();
 	    JPanel panel = new JPanel(); 
-	    JButton button = new JButton("Button");
-	    TextField x = new TextField();
-	    panel.add(x);
+	    JLabel label = new JLabel(" "); 
+	    JButton button = new JButton("Draw Card");
+	    
 	    frame.setSize(700, 900);
 	    frame.setLayout(new BorderLayout());
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.getContentPane().add(button, BorderLayout.SOUTH);
+	    panel.add(label, BorderLayout.NORTH);
+	    panel.add(button, BorderLayout.SOUTH);
+	    frame.getContentPane().add(panel, BorderLayout.SOUTH);
+	    button.addActionListener(new ActionListener()
+	    {
+	      public void actionPerformed(ActionEvent e)
+	      {
+	      canvas.repaint(); 
+	      }
+	    });
 	    frame.getContentPane().add(canvas, BorderLayout.CENTER);
 	    frame.setResizable(true);
 	    frame.setVisible(true);
 		}
-		
-public static void addCards()
-	{
-	cardsArray.add("SorryCard.jpg");
-	cardsArray.add("One.jpg");
-	cardsArray.add("Two.jpg");
-	cardsArray.add("Three.jpg");
-	cardsArray.add("Four.jpg");
-	cardsArray.add("Five.jpg");
-	cardsArray.add("Seven.jpg");
-	cardsArray.add("Eight.jpg"); 
-	cardsArray.add("Ten.jpg");
-	cardsArray.add("Eleven.jpg");
-	cardsArray.add("Twelve.jpg");
-	}
 
-public static int chooseCard()
+	public static int chooseCard()
 	{
-	int x = (int)(Math.random()*cardsArray.size());
+	int x = (int)(Math.random()*MakeCards.deck.size());
 	return x;
 	}
 	
@@ -68,12 +64,13 @@ public static int chooseCard()
 		p1Pawns = one; 
 		p2Pawns = two; 
 		p3Pawns = three; 
-		p4Pawns = four; 
-		
+		p4Pawns = four;
 		}
+
 	public void paint(Graphics graphics) 
 	{
-	addCards(); 
+	setBackground(Color.black);
+	MakeCards.makeCards();
 	chooseCard();
 		graphics.setColor(Color.black);
 		graphics.fillRect(45, 45, 585, 585);
@@ -95,7 +92,7 @@ public static int chooseCard()
 		graphics.fillOval(425, 540, 90, 90); 
 		for(int j=0; j<15; j++)
     		{
-			
+			u=0;
     		switch(j)
         		{
         		case 0: case 2: case 4: case 6: case 8: case 10: case 12: case 14:
@@ -243,18 +240,10 @@ public static int chooseCard()
 		
 		BufferedImage one = null;
 		try {
-		    one = ImageIO.read(new File(cardsArray.get(chooseCard())));
+		    one = ImageIO.read(new File(MakeCards.deck.get(chooseCard()).getFileName()));
 		} catch (IOException e) {
 		}
 		graphics.drawImage(one, 240, 200, 200, 300, null);
-		try
-			{
-			Thread.sleep(500);
-			} catch (InterruptedException e)
-			{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
 		}
 	
 	public static void makeSpots()
