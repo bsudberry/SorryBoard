@@ -16,11 +16,7 @@ public class GamePlay
 	static String labelWords; 
 	public static void startGame() throws InterruptedException
 		{
-		labelWords = "killjoy";
 		GameBoard.makeBoard();
-		Thread.sleep(200); 
-		labelWords = "love"; 
-		GameBoard.canvas.repaint();
 		}
 	}
 	

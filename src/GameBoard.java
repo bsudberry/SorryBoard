@@ -22,13 +22,14 @@ public class GameBoard extends Canvas
 	static Color purple = new Color(125, 38, 205); 
 	static ArrayList<Pawn> x = new ArrayList<Pawn>();
 	static ArrayList<String> cardsArray = new ArrayList<String>(); 
+	static int cardIndex; 
 	
 	public static void makeBoard()
 		{
-		
+		cardIndex=0;
 	    JFrame frame = new JFrame();
 	    JPanel panel = new JPanel(); 
-	    JLabel label = new JLabel(" "); 
+	    JLabel label = new JLabel("HMMMMMM"); 
 	    JButton button = new JButton("Draw Card");
 	    
 	    frame.setSize(700, 900);
@@ -38,20 +39,20 @@ public class GameBoard extends Canvas
 	    panel.add(button, BorderLayout.SOUTH);
 	    frame.getContentPane().add(panel, BorderLayout.SOUTH);
 	    button.addActionListener(new ActionListener()
-	    {
+	    	{
 	      public void actionPerformed(ActionEvent e)
-	      {
-	      canvas.repaint(); 
-	      }
-	    });
+		      {
+		      canvas.repaint(); 
+		      }
+	    	});
 	    frame.getContentPane().add(canvas, BorderLayout.CENTER);
-	    frame.setResizable(true);
+	    frame.setResizable(false);
 	    frame.setVisible(true);
 		}
 
 	public static int chooseCard()
 	{
-	int x = (int)(Math.random()*MakeCards.deck.size());
+	int x = (int)(Math.random()*(MakeCards.deck.size()-1)+1);
 	return x;
 	}
 	
@@ -71,7 +72,6 @@ public class GameBoard extends Canvas
 	{
 	setBackground(Color.black);
 	MakeCards.makeCards();
-	chooseCard();
 		graphics.setColor(Color.black);
 		graphics.fillRect(45, 45, 585, 585);
 		graphics.setColor(Color.red);
@@ -237,17 +237,23 @@ public class GameBoard extends Canvas
 		graphics.drawLine(540,495,585,495);
 		graphics.drawLine(540,540,585,540);
 		graphics.drawLine(540,585,585,585);
+		System.out.println("Hello");
 		
-		BufferedImage one = null;
-		try {
-		    one = ImageIO.read(new File(MakeCards.deck.get(chooseCard()).getFileName()));
-		} catch (IOException e) {
+		BufferedImage cardImage = null;
+			try 
+				{
+				System.out.println(cardIndex);
+			    cardImage = ImageIO.read(new File(MakeCards.deck.get(cardIndex).getFileName()));
+				} 
+			catch (IOException e) 
+				{
+				}
+			graphics.drawImage(cardImage, 240, 200, 200, 300, null);
+		cardIndex = chooseCard(); 
 		}
-		graphics.drawImage(one, 240, 200, 200, 300, null);
-		}
+		
 	
 	public static void makeSpots()
-
 		{
 		for(int i=1; i<58; i++)
 			{
