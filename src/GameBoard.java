@@ -23,13 +23,13 @@ public class GameBoard extends Canvas
 	static ArrayList<Pawn> x = new ArrayList<Pawn>();
 	static ArrayList<String> cardsArray = new ArrayList<String>(); 
 	static int cardIndex; 
+	static int counter =1; 
 	
 	public static void makeBoard()
 		{
-		cardIndex=0;
 	    JFrame frame = new JFrame();
 	    JPanel panel = new JPanel(); 
-	    JLabel label = new JLabel("HMMMMMM"); 
+	    JLabel label = new JLabel("Player 1:"); 
 	    JButton button = new JButton("Draw Card");
 	    
 	    frame.setSize(700, 900);
@@ -52,7 +52,7 @@ public class GameBoard extends Canvas
 
 	public static int chooseCard()
 	{
-	int x = (int)(Math.random()*(MakeCards.deck.size()-1)+1);
+	int x = (int)(Math.random()*(MakeCards.deck.size()-1))+1;
 	return x;
 	}
 	
@@ -71,25 +71,24 @@ public class GameBoard extends Canvas
 	public void paint(Graphics graphics) 
 	{
 	setBackground(Color.black);
-	MakeCards.makeCards();
-		graphics.setColor(Color.black);
-		graphics.fillRect(45, 45, 585, 585);
-		graphics.setColor(Color.red);
-		graphics.fillRect(90, 45, 45, 225); 
-		graphics.setColor(Color.green);
-		graphics.fillRect(45, 540, 225, 45);
-		graphics.setColor(Color.yellow);
-		graphics.fillRect(405, 90, 225, 45);
-		graphics.setColor(purple);
-		graphics.fillRect(540, 405, 45, 225);
-		graphics.setColor(Color.red);
-		graphics.fillOval(155, 45, 90, 90);
-		graphics.setColor(Color.green);
-		graphics.fillOval(45, 430, 90, 90);
-		graphics.setColor(Color.yellow);
-		graphics.fillOval(540, 155, 90, 90);
-		graphics.setColor(purple);
-		graphics.fillOval(425, 540, 90, 90); 
+	graphics.setColor(Color.black);
+	graphics.fillRect(45, 45, 585, 585);
+	graphics.setColor(Color.red);
+	graphics.fillRect(90, 45, 45, 225); 
+	graphics.setColor(Color.green);
+	graphics.fillRect(45, 540, 225, 45);
+	graphics.setColor(Color.yellow);
+	graphics.fillRect(405, 90, 225, 45);
+	graphics.setColor(purple);
+	graphics.fillRect(540, 405, 45, 225);
+	graphics.setColor(Color.red);
+	graphics.fillOval(155, 45, 90, 90);
+	graphics.setColor(Color.green);
+	graphics.fillOval(45, 430, 90, 90);
+	graphics.setColor(Color.yellow);
+	graphics.fillOval(540, 155, 90, 90);
+	graphics.setColor(purple);
+	graphics.fillOval(425, 540, 90, 90); 
 		for(int j=0; j<15; j++)
     		{
 			u=0;
@@ -237,19 +236,25 @@ public class GameBoard extends Canvas
 		graphics.drawLine(540,495,585,495);
 		graphics.drawLine(540,540,585,540);
 		graphics.drawLine(540,585,585,585);
-		System.out.println("Hello");
 		
 		BufferedImage cardImage = null;
 			try 
 				{
-				System.out.println(cardIndex);
 			    cardImage = ImageIO.read(new File(MakeCards.deck.get(cardIndex).getFileName()));
 				} 
 			catch (IOException e) 
 				{
 				}
 			graphics.drawImage(cardImage, 240, 200, 200, 300, null);
-		cardIndex = chooseCard(); 
+			if(counter<2)
+				{
+				cardIndex=0;
+				counter++;
+				}
+			else
+				{
+				cardIndex = chooseCard();
+				}
 		}
 		
 	

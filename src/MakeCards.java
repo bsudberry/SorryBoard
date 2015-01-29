@@ -54,7 +54,5 @@ public class MakeCards
 			{
 			deck.add(new Card("Twelve.jpg", 5, false, false, false , false, false, false));
 			}
-		
-		
 		}
 	}
