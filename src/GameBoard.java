@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.*; 
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
  
@@ -20,8 +21,8 @@ public class GameBoard extends Canvas
 	static ArrayList<Pawn> p3Pawns = new ArrayList<Pawn>(); 
 	static ArrayList<Pawn> p4Pawns = new ArrayList<Pawn>();
 	static Color purple = new Color(125, 38, 205); 
-	static ArrayList<Pawn> x = new ArrayList<Pawn>();
 	static ArrayList<String> cardsArray = new ArrayList<String>(); 
+	ArrayList<Pawn> x = new ArrayList<Pawn>(); 
 	static int cardIndex; 
 	static int counter =1; 
 	
@@ -70,6 +71,7 @@ public class GameBoard extends Canvas
 
 	public void paint(Graphics graphics) 
 	{
+	makeSpots(); 
 	setBackground(Color.black);
 	graphics.setColor(Color.black);
 	graphics.fillRect(45, 45, 585, 585);
@@ -193,27 +195,29 @@ public class GameBoard extends Canvas
 				x.clear();
 				 x = (p3Pawns);
 				}
-			else if(i==3)
+			else
 				{
 				x.clear();
 				 x = (p4Pawns);
 				}
-//			for(int z=0; z<4; z++)
-//				{
-//				Pawn p = x.get(z);
-//				if(p.getLoc() >0)
-//					{
-//					graphics.setColor(p.getColor());
-//					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
-//					graphics.setColor(Color.black); 
-//					graphics.drawString(String.valueOf(p.getpNum()), spaces.get(p.getLoc()).getxC()+19, spaces.get(p.getLoc()).getyC()+27); 
-//					}
-//				else
-//					{
-//					graphics.setColor(Color.blue);
-//					graphics.fillOval(p.getxHome(), p.getyHome(), 45, 45);
-//					}
-//				}
+			
+			for(int z=0; z<4; z++)
+				{
+				Pawn p = x.get(z);
+				System.out.println(p.getpNum());
+				if(p.getLoc() >0)
+					{
+					graphics.setColor(p.getColor());
+					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
+					graphics.setColor(Color.black); 
+					graphics.drawString(String.valueOf(p.getpNum()), spaces.get(p.getLoc()).getxC()+19, spaces.get(p.getLoc()).getyC()+27); 
+					}
+				else
+					{
+					graphics.setColor(Color.blue);
+					graphics.fillOval(p.getxHome(), p.getyHome(), 45, 45);
+					}
+				}
 			}
 		
 		graphics.setColor(Color.black); 

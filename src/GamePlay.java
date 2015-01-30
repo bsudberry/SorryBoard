@@ -29,13 +29,13 @@ public class GamePlay
 	
 	static Object[] pawnChoices = {1,2,3,4};
 	ImageIcon pawn = new ImageIcon("pawn.jpg");
+	
 	public static void startGame() throws InterruptedException, IOException
 		{
 		PawnManager.makePawns();
 		MakeCards.makeCards();
 		GameBoard.cardIndex=0;
 		GameBoard.makeBoard();
-		splitPawns(PawnManager.p1Pawns);
 		}
 	
 	public static int choosePawn(ArrayList<Pawn> x) throws IOException

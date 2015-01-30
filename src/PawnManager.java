@@ -9,6 +9,7 @@ public class PawnManager
 	static ArrayList<Pawn> p3Pawns = new ArrayList<Pawn>(); 
 	static ArrayList<Pawn> p4Pawns = new ArrayList<Pawn>(); 
 	static Color purple = new Color(226, 156, 50); 
+	
 	public static void makePawns()
 		{
 		for(int i=0; i<4; i++)
@@ -18,5 +19,11 @@ public class PawnManager
 			p3Pawns.add(new Pawn(3,0, (i+1),true, new NotSafe(), false, Color.blue,450,565,34));
 			p4Pawns.add(new Pawn(4,0, (i+1),true, new NotSafe(), false, Color.green,70,455,48));
 			}
+		p1Pawns.get(0).setLoc(52); 
+		p1Pawns.get(1).setLoc(37);
+		p1Pawns.get(2).setLoc(52); 
+		p1Pawns.get(3).setLoc(37);
+		GameBoard.acceptPawns(p1Pawns, p2Pawns, p3Pawns, p4Pawns);
 		}
+	
 	}
