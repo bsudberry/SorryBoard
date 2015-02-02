@@ -23,7 +23,6 @@ public class PawnManager
 		p1Pawns.get(1).setLoc(37);
 		p1Pawns.get(2).setLoc(52); 
 		p1Pawns.get(3).setLoc(37);
-		GameBoard.acceptPawns(p1Pawns, p2Pawns, p3Pawns, p4Pawns);
 		}
 	
 	}
