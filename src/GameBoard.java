@@ -12,8 +12,7 @@ import javax.swing.*;
 public class GameBoard extends Canvas
 	{
 	static GameBoard canvas = new GameBoard();
-	
-	public static ArrayList<BoardSpace> spaces = new ArrayList<BoardSpace>(); 
+	static ArrayList<BoardSpace> spaces = new ArrayList<BoardSpace>(); 
 	private static final long	serialVersionUID	= 1L;
 	static int u, b, k; 
 	static ArrayList<Pawn> p1Pawns = new ArrayList<Pawn>(); 
@@ -25,15 +24,15 @@ public class GameBoard extends Canvas
 	static ArrayList<Pawn> x = new ArrayList<Pawn>(); 
 	static int cardIndex; 
 	static int counter =1;  
+	static JLabel label = new JLabel(); 
 	
 	public static void makeBoard()
 		{
 	    JFrame frame = new JFrame();
 	    JPanel panel = new JPanel(); 
-	    JLabel label = new JLabel("Player 1:"); 
+	    label.setText("Player 1: ");
 	    JButton button = new JButton("Draw Card");
-	    
-	    frame.setSize(700, 700);
+	    frame.setSize(700, 800);
 	    frame.setLayout(new BorderLayout());
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    panel.add(label, BorderLayout.NORTH);
@@ -43,7 +42,21 @@ public class GameBoard extends Canvas
 	    	{
 	      public void actionPerformed(ActionEvent e)
 		      {
-		      canvas.repaint(); 
+		     try
+				{
+				chooseCard();
+				canvas.repaint();
+				Thread.sleep(500);
+				GamePlay.makeMove();
+				} catch (IOException e1)
+				{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				} catch (InterruptedException e1)
+					{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					}
 		      }
 	    	});
 	    frame.getContentPane().add(canvas, BorderLayout.CENTER);
@@ -63,17 +76,15 @@ public class GameBoard extends Canvas
 		p2Pawns.clear();
 		p3Pawns.clear();
 		p4Pawns.clear();
-		p1Pawns = one; 
-		p2Pawns = two; 
-		p3Pawns = three; 
-		p4Pawns = four;
+		p1Pawns = new ArrayList<Pawn>(one); 
+		p2Pawns = new ArrayList<Pawn>(two); 
+		p3Pawns = new ArrayList<Pawn>(three); 
+		p4Pawns = new ArrayList<Pawn>(four);
 		}
 
 	public void paint(Graphics graphics) 
 	{
 	acceptPawns(PawnManager.p1Pawns, PawnManager.p2Pawns, PawnManager.p3Pawns, PawnManager.p4Pawns);
-	System.out.println("Starting");
-	makeSpots(); 
 	graphics.setColor(Color.black);
 	graphics.fillRect(45, 45, 585, 585);
 	graphics.setColor(Color.red);
@@ -205,7 +216,6 @@ public class GameBoard extends Canvas
 			for(int z=0; z<4; z++)
 				{
 				Pawn p = x.get(z);
-				System.out.println(p.getpNum());
 				if(p.getLoc() >0)
 					{
 					graphics.setColor(p.getColor());
@@ -251,15 +261,7 @@ public class GameBoard extends Canvas
 				{
 				}
 			graphics.drawImage(cardImage, 240, 200, 200, 300, null);
-			if(counter<2)
-				{
-				cardIndex=0;
-				counter++;
-				}
-			else
-				{
-				cardIndex = chooseCard();
-				}
+
 		}	
 	
 	public static void makeSpots()
@@ -293,4 +295,5 @@ public class GameBoard extends Canvas
 			spaces.get(i).setyC(675-((i-43)*45));
 			}
 		}
+	
 	}

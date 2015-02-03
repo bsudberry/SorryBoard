@@ -26,7 +26,7 @@ public class GamePlay
 	{
 	static String labelWords; 
 	static JFrame choosePawn = new JFrame();
-	
+	static boolean gameOver = false;
 	static Object[] pawnChoices = {1,2,3,4};
 	ImageIcon pawn = new ImageIcon("pawn.jpg");
 	
@@ -34,11 +34,21 @@ public class GamePlay
 		{
 		PawnManager.makePawns();
 		MakeCards.makeCards();
-		GameBoard.cardIndex=0;
+		GameBoard.makeSpots();
 		GameBoard.makeBoard();
-		} 
+		}
 	
-	public static int choosePawn(ArrayList<Pawn> x) throws IOException
+	public static void makeMove() throws IOException
+	{
+
+			GameBoard.chooseCard(); 
+			GameBoard.label.setText("Player 1, click Draw!");
+			choosePawn(PawnManager.p1Pawns, MakeCards.deck.get(GameBoard.cardIndex));
+			GameBoard.canvas.repaint();
+	}
+		
+	
+	public static int choosePawn(ArrayList<Pawn> x, Card card) throws IOException
 		{
 		Object [] pawnsArray = new Object [x.size()];
 		for(int i=0; i<4; i++)
@@ -48,6 +58,7 @@ public class GamePlay
 		BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
 		ImageIcon pawn = new ImageIcon(pawnImage);
 		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Initial dealing", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
+		x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue()); 
 		return pawnChosen;
 		}
 	
