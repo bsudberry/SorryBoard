@@ -23,6 +23,6 @@ public class PawnManager
 		p1Pawns.get(1).setLoc(37);
 		p1Pawns.get(2).setLoc(52); 
 		p1Pawns.get(3).setLoc(37);
-		}
+		} 
 	
 	}

@@ -36,7 +36,7 @@ public class GamePlay
 		MakeCards.makeCards();
 		GameBoard.cardIndex=0;
 		GameBoard.makeBoard();
-		}
+		} 
 	
 	public static int choosePawn(ArrayList<Pawn> x) throws IOException
 		{

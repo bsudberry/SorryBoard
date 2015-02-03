@@ -22,9 +22,9 @@ public class GameBoard extends Canvas
 	static ArrayList<Pawn> p4Pawns = new ArrayList<Pawn>();
 	static Color purple = new Color(125, 38, 205); 
 	static ArrayList<String> cardsArray = new ArrayList<String>(); 
-	ArrayList<Pawn> x = new ArrayList<Pawn>(); 
+	static ArrayList<Pawn> x = new ArrayList<Pawn>(); 
 	static int cardIndex; 
-	static int counter =1; 
+	static int counter =1;  
 	
 	public static void makeBoard()
 		{
@@ -33,7 +33,7 @@ public class GameBoard extends Canvas
 	    JLabel label = new JLabel("Player 1:"); 
 	    JButton button = new JButton("Draw Card");
 	    
-	    frame.setSize(700, 900);
+	    frame.setSize(700, 700);
 	    frame.setLayout(new BorderLayout());
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    panel.add(label, BorderLayout.NORTH);
@@ -71,8 +71,9 @@ public class GameBoard extends Canvas
 
 	public void paint(Graphics graphics) 
 	{
+	acceptPawns(PawnManager.p1Pawns, PawnManager.p2Pawns, PawnManager.p3Pawns, PawnManager.p4Pawns);
+	System.out.println("Starting");
 	makeSpots(); 
-	setBackground(Color.black);
 	graphics.setColor(Color.black);
 	graphics.fillRect(45, 45, 585, 585);
 	graphics.setColor(Color.red);
@@ -259,8 +260,7 @@ public class GameBoard extends Canvas
 				{
 				cardIndex = chooseCard();
 				}
-		}
-		
+		}	
 	
 	public static void makeSpots()
 		{
