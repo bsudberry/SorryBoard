@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,88 +34,92 @@ public class GamePlay
 	
 	public static void startGame() throws InterruptedException, IOException
 		{
-		ArrayList<ArrayList<Pawn>> allPlayers = new ArrayList<ArrayList<Pawn>>();
-		allPlayers.add(PawnManager.p1Pawns);
-		allPlayers.add(PawnManager.p2Pawns);
-		allPlayers.add(PawnManager.p3Pawns);
-		allPlayers.add(PawnManager.p4Pawns); 
 		MakeCards.makeCards();
 		PawnManager.makePawns();
 		MakeCards.makeCards();
 		GameBoard.makeSpots();
+		allPlayers.add(PawnManager.p1Pawns);
+		allPlayers.add(PawnManager.p2Pawns);
+		allPlayers.add(PawnManager.p3Pawns);
+		allPlayers.add(PawnManager.p4Pawns);
 		GameBoard.makeBoard();
-		for(int i = 0; i<allPlayers.size(); i++)
+		}
+	
+	public static void continueGame() throws InterruptedException
+		{
+		for(int i=0; i<allPlayers.size(); i++)
 			{
-			
-		 GameBoard.button.addActionListener(new ActionListener()
-		    	{
-		      public void actionPerformed(ActionEvent e)
-			      {
-			     try
-					{
-					GameBoard.cardIndex = GameBoard.chooseCard();
-					GameBoard.canvas.repaint();
-					GamePlay.makeMove(i ,MakeCards.deck.get(GameBoard.cardIndex));
-					} catch (IOException e1)
-					{
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					} catch (InterruptedException e1)
-						{
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-						}
-			      }
-		    	});
+			Thread.sleep(1000); 
+			GameBoard.label.setText("Player " + allPlayers.get(i).get(0).getPlayer() + ": Click Draw!");
+			final ArrayList<Pawn> currentPlayer = new ArrayList<Pawn>(allPlayers.get(i)); 
+			 GameBoard.button.addActionListener(new ActionListener()
+			    	{
+			    	public void actionPerformed(ActionEvent e)
+			    			{
+			    			try
+			    				{
+								GameBoard.cardIndex = GameBoard.chooseCard();
+								GameBoard.canvas.repaint();
+								GamePlay.makeMove(currentPlayer, MakeCards.deck.get(GameBoard.cardIndex));
+								} catch (IOException e1)
+								{
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+								} catch (InterruptedException e1)
+									{
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+									}
+						      }
+			    	});
 			}
 		}
 	
-	public static void makeMove(int i, Card x) throws IOException, InterruptedException
+	public static void makeMove(ArrayList<Pawn> player, Card x) throws IOException, InterruptedException
 			{
-			GameBoard.label.setText("Player 1, click Draw!");
 			if(x.getFileName().equals("SorryCard.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			else if(x.getFileName().equals("One.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			else if(x.getFileName().equals("Two.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			else if(x.getFileName().equals("Three.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			else if(x.getFileName().equals("Four.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			else if(x.getFileName().equals("Five.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			else if(x.getFileName().equals("Seven.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			else if(x.getFileName().equals("Eight.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			else if(x.getFileName().equals("Ten.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			else if(x.getFileName().equals("Eleven.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			else if(x.getFileName().equals("Twelve.jpg"))
 				{
-				choosePawn(allPlayers.get(i), x);
+				choosePawn(player, x);
 				}
 			GameBoard.canvas.repaint();
 	}
@@ -130,10 +135,17 @@ public class GamePlay
 		BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
 		ImageIcon pawn = new ImageIcon(pawnImage);
 		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Initial dealing", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
-		x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue()); 
+		
+		if((x.get(pawnChosen).getLoc() + card.getValue() +x.get(pawnChosen).getStartSpot())>57)
+				{
+				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue() +x.get(pawnChosen).getStartSpot()-58); 
+				}
+		else
+				{
+				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue() +x.get(pawnChosen).getStartSpot()); 
+				}
 		return pawnChosen;
 		}
-	
 	public static void splitPawns(ArrayList<Pawn>x) throws IOException
 		{
 		final ArrayList<Pawn> l = new ArrayList<Pawn>(x);

@@ -31,12 +31,12 @@ public class GameBoard extends Canvas
 		{
 	    JFrame frame = new JFrame();
 	    JPanel panel = new JPanel(); 
-	    label.setText("Player 1: ");
 	    frame.setSize(700, 800);
 	    frame.setLayout(new BorderLayout());
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    panel.add(label, BorderLayout.NORTH);
 	    panel.add(button, BorderLayout.SOUTH);
+	   
 	    frame.getContentPane().add(panel, BorderLayout.SOUTH);
 	    frame.getContentPane().add(canvas, BorderLayout.CENTER);
 	    frame.setResizable(false);

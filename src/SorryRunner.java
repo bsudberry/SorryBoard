@@ -8,6 +8,7 @@ public class SorryRunner
 	public static void main(String[] args) throws InterruptedException, IOException
 		{
 		GamePlay.startGame();
+		GamePlay.continueGame(); 
 		}	
 	}
  
