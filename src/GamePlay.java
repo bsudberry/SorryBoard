@@ -28,22 +28,94 @@ public class GamePlay
 	static JFrame choosePawn = new JFrame();
 	static boolean gameOver = false;
 	static Object[] pawnChoices = {1,2,3,4};
-	ImageIcon pawn = new ImageIcon("pawn.jpg");
+	static ImageIcon pawn = new ImageIcon("pawn.jpg");
+	static ArrayList<ArrayList<Pawn>> allPlayers = new ArrayList<ArrayList<Pawn>>();
 	
 	public static void startGame() throws InterruptedException, IOException
 		{
+		ArrayList<ArrayList<Pawn>> allPlayers = new ArrayList<ArrayList<Pawn>>();
+		allPlayers.add(PawnManager.p1Pawns);
+		allPlayers.add(PawnManager.p2Pawns);
+		allPlayers.add(PawnManager.p3Pawns);
+		allPlayers.add(PawnManager.p4Pawns); 
+		MakeCards.makeCards();
 		PawnManager.makePawns();
 		MakeCards.makeCards();
 		GameBoard.makeSpots();
 		GameBoard.makeBoard();
+		for(int i = 0; i<allPlayers.size(); i++)
+			{
+			
+		 GameBoard.button.addActionListener(new ActionListener()
+		    	{
+		      public void actionPerformed(ActionEvent e)
+			      {
+			     try
+					{
+					GameBoard.cardIndex = GameBoard.chooseCard();
+					GameBoard.canvas.repaint();
+					GamePlay.makeMove(i ,MakeCards.deck.get(GameBoard.cardIndex));
+					} catch (IOException e1)
+					{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					} catch (InterruptedException e1)
+						{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+						}
+			      }
+		    	});
+			}
 		}
 	
-	public static void makeMove() throws IOException
-	{
-
-			GameBoard.chooseCard(); 
+	public static void makeMove(int i, Card x) throws IOException, InterruptedException
+			{
 			GameBoard.label.setText("Player 1, click Draw!");
-			choosePawn(PawnManager.p1Pawns, MakeCards.deck.get(GameBoard.cardIndex));
+			if(x.getFileName().equals("SorryCard.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
+			else if(x.getFileName().equals("One.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
+			else if(x.getFileName().equals("Two.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
+			else if(x.getFileName().equals("Three.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
+			else if(x.getFileName().equals("Four.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
+			else if(x.getFileName().equals("Five.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
+			else if(x.getFileName().equals("Seven.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
+			else if(x.getFileName().equals("Eight.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
+			else if(x.getFileName().equals("Ten.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
+			else if(x.getFileName().equals("Eleven.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
+			else if(x.getFileName().equals("Twelve.jpg"))
+				{
+				choosePawn(allPlayers.get(i), x);
+				}
 			GameBoard.canvas.repaint();
 	}
 		

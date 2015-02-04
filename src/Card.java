@@ -9,8 +9,17 @@ public class Card
 	private boolean drawAgain; 
 	private boolean backward; 
 	private boolean switchSpots; 
+	private boolean isNormal; 
 	
-	public Card(String x, int v, boolean s, boolean mfs, boolean sry, boolean da, boolean b, boolean sS)
+	public boolean isNormal()
+		{
+		return isNormal;
+		}
+	public void setNormal(boolean isNormal)
+		{
+		this.isNormal = isNormal;
+		}
+	public Card(String x, int v, boolean s, boolean mfs, boolean sry, boolean da, boolean b, boolean sS, boolean n)
 		{
 		fileName = x; 
 		value = v; 
@@ -20,6 +29,7 @@ public class Card
 		drawAgain = da; 
 		backward = b; 
 		switchSpots = sS; 
+		isNormal = n; 
 		}
 	public boolean isDrawAgain() {
 		return drawAgain;
