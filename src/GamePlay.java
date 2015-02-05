@@ -45,38 +45,30 @@ public class GamePlay
 		GameBoard.makeBoard();
 		}
 	
-	public static void continueGame() throws InterruptedException
-		{
-		for(int i=0; i<allPlayers.size(); i++)
+	public static void makeMove(int counter, Card x) throws IOException, InterruptedException
 			{
-			Thread.sleep(1000); 
-			GameBoard.label.setText("Player " + allPlayers.get(i).get(0).getPlayer() + ": Click Draw!");
-			final ArrayList<Pawn> currentPlayer = new ArrayList<Pawn>(allPlayers.get(i)); 
-			 GameBoard.button.addActionListener(new ActionListener()
-			    	{
-			    	public void actionPerformed(ActionEvent e)
-			    			{
-			    			try
-			    				{
-								GameBoard.cardIndex = GameBoard.chooseCard();
-								GameBoard.canvas.repaint();
-								GamePlay.makeMove(currentPlayer, MakeCards.deck.get(GameBoard.cardIndex));
-								} catch (IOException e1)
-								{
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-								} catch (InterruptedException e1)
-									{
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-									}
-						      }
-			    	});
-			}
-		}
-	
-	public static void makeMove(ArrayList<Pawn> player, Card x) throws IOException, InterruptedException
-			{
+			ArrayList<Pawn> player = new ArrayList<Pawn>(); 
+			player.clear(); 
+			if((double) counter%4==0)
+				{
+				player = allPlayers.get(3);
+				}
+			else if((double) counter%4==3)
+				{
+				player = allPlayers.get(2);
+				}
+			else if((double) counter%4==2)
+				{
+				player = allPlayers.get(1);
+				}
+			else if((double)counter%4==1)
+				{
+				player = allPlayers.get(0);
+				}
+			else
+				{
+				}
+			
 			if(x.getFileName().equals("SorryCard.jpg"))
 				{
 				choosePawn(player, x);
@@ -124,7 +116,6 @@ public class GamePlay
 			GameBoard.canvas.repaint();
 	}
 		
-	
 	public static int choosePawn(ArrayList<Pawn> x, Card card) throws IOException
 		{
 		Object [] pawnsArray = new Object [x.size()];
@@ -146,6 +137,7 @@ public class GamePlay
 				}
 		return pawnChosen;
 		}
+	
 	public static void splitPawns(ArrayList<Pawn>x) throws IOException
 		{
 		final ArrayList<Pawn> l = new ArrayList<Pawn>(x);
@@ -197,5 +189,7 @@ public class GamePlay
 			PawnManager.p1Pawns = new ArrayList<Pawn>(m); 
 			}
 		}
+	
+	
 	}
 	

@@ -26,6 +26,8 @@ public class GameBoard extends Canvas
 	static int counter =1;  
 	static JLabel label = new JLabel(); 
 	static  JButton button = new JButton("Draw Card");
+	static int playerCounter=4; 
+	static int labelCounter=0; 
 	
 	public static void makeBoard()
 		{
@@ -36,7 +38,29 @@ public class GameBoard extends Canvas
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    panel.add(label, BorderLayout.NORTH);
 	    panel.add(button, BorderLayout.SOUTH);
-	   
+	  
+		
+		 GameBoard.button.addActionListener(new ActionListener()
+		    	{
+		    	public void actionPerformed(ActionEvent e)
+		    			{
+		    			try
+		    				{
+		    				playerCounter++; 
+							GameBoard.cardIndex = GameBoard.chooseCard();
+							GameBoard.canvas.repaint();
+							GamePlay.makeMove(playerCounter, MakeCards.deck.get(GameBoard.cardIndex));
+							} catch (IOException e1)
+							{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+							} catch (InterruptedException e1)
+								{
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+								}
+					      }
+		    	});
 	    frame.getContentPane().add(panel, BorderLayout.SOUTH);
 	    frame.getContentPane().add(canvas, BorderLayout.CENTER);
 	    frame.setResizable(false);
@@ -200,6 +224,7 @@ public class GameBoard extends Canvas
 					graphics.setColor(p.getColor());
 					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
 					graphics.setColor(Color.black); 
+					graphics.setFont(new  Font("Serif", Font.BOLD, 14));
 					graphics.drawString(String.valueOf(p.getpNum()), spaces.get(p.getLoc()).getxC()+19, spaces.get(p.getLoc()).getyC()+27); 
 					}
 				else
