@@ -34,7 +34,7 @@ public class MakeCards
 			{
 			deck.add(new Card("Five.jpg", 5, false, false, false , false, false, false, true));
 			}
-		for(int i=0; i<1; i++)
+		for(int i=0; i<100; i++)
 			{
 			deck.add(new Card("Seven.jpg", 7, true, false, false , false, false, false,false ));
 			}

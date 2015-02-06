@@ -47,23 +47,28 @@ public class GamePlay
 	
 	public static void makeMove(int counter, Card x) throws IOException, InterruptedException
 			{
+			int index=0; 
 			ArrayList<Pawn> player = new ArrayList<Pawn>(); 
 			player.clear(); 
 			if((double) counter%4==0)
 				{
 				player = allPlayers.get(3);
+				index = 3;
 				}
 			else if((double) counter%4==3)
 				{
 				player = allPlayers.get(2);
+				index = 2;
 				}
 			else if((double) counter%4==2)
 				{
 				player = allPlayers.get(1);
+				 index = 1;
 				}
 			else if((double)counter%4==1)
 				{
 				player = allPlayers.get(0);
+				index=0;
 				}
 			else
 				{
@@ -95,7 +100,7 @@ public class GamePlay
 				}
 			else if(x.getFileName().equals("Seven.jpg"))
 				{
-				choosePawn(player, x);
+				splitPawns(player, index);
 				}
 			else if(x.getFileName().equals("Eight.jpg"))
 				{
@@ -127,26 +132,29 @@ public class GamePlay
 		ImageIcon pawn = new ImageIcon(pawnImage);
 		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Initial dealing", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
 		
-		if((x.get(pawnChosen).getLoc() + card.getValue() +x.get(pawnChosen).getStartSpot())>57)
+		if((x.get(pawnChosen).getLoc() + card.getValue()) >57)
 				{
-				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue() +x.get(pawnChosen).getStartSpot()-58); 
+				x.get(pawnChosen).setStart(false);
+				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue() -58); 
 				}
 		else
 				{
-				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue() +x.get(pawnChosen).getStartSpot()); 
+				x.get(pawnChosen).setStart(false);
+				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue()); 
 				}
 		return pawnChosen;
 		}
 	
-	public static void splitPawns(ArrayList<Pawn>x) throws IOException
+	public static void splitPawns(ArrayList<Pawn>player, int index) throws IOException
 		{
-		final ArrayList<Pawn> l = new ArrayList<Pawn>(x);
+		final int iN = index;
+		final ArrayList<Pawn> l = new ArrayList<Pawn>(player); 
 		Object pawnsChosen [] = new Object[4];
-		Object [] pawnsArray = new Object [x.size()];
+		Object [] pawnsArray = new Object [player.size()];
 		String [] spots = {"Move 1", " Move 2", "Move 3", "Move 4", "Move 5", "Move 6","Move 7"}; 
 		for(int i=0; i<4; i++)
 			{
-			pawnsArray[i] ="Pawn " + x.get(i).getpNum();
+			pawnsArray[i] ="Pawn " + player.get(i).getpNum();
 			}
 		BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
 		ImageIcon pawn = new ImageIcon(pawnImage);
@@ -164,32 +172,37 @@ public class GamePlay
 		panel.add(chooseSpots2);
 		panel.add(button);
 		choosePawn.add(panel);
-		choosePawn.setSize(200,300);
+		choosePawn.setSize(200,200);
 		choosePawn.setLocationRelativeTo(null); 
 		choosePawn.setVisible(true);
-		int num=0; 
 		button.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent arg0)
 					{
-					setSplitLocations(choosePawn1.getSelectedIndex(),chooseSpots1.getSelectedIndex(),l);
-					setSplitLocations(choosePawn2.getSelectedIndex(),chooseSpots2.getSelectedIndex(),l);
-					choosePawn.dispose(); 
+					setSplitLocations(choosePawn1.getSelectedIndex(),chooseSpots1.getSelectedIndex()+1,l,iN);
+					setSplitLocations(choosePawn2.getSelectedIndex(),chooseSpots2.getSelectedIndex()+1,l,iN);
+					choosePawn.dispose();
 					}
 			});
-		
 		}
 	
-	public static void setSplitLocations(int n,  int y, ArrayList<Pawn> m)
+	public static void setSplitLocations(int n,  int y, ArrayList<Pawn> m, int index1)
 		{
 		int location = m.get(n).getLoc();
 		m.get(n).setLoc(location + y); 
-		if(m.get(0).getPlayer()==1)
+		if((m.get(n).getLoc() +y) >57)
 			{
-			PawnManager.p1Pawns = new ArrayList<Pawn>(m); 
+			m.get(n).setStart(false);
+			m.get(n).setLoc(m.get(n).getLoc() + y -58); 
 			}
+	else
+			{
+			m.get(n).setStart(false);
+			m.get(n).setLoc(m.get(n).getLoc() +y); 
+			}
+		allPlayers.set(index1,m);
+		GameBoard.canvas.repaint();
 		}
-	
 	
 	}
 	

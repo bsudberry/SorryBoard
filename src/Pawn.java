@@ -17,7 +17,7 @@ public class Pawn implements Safety
 	public Pawn(int p, int l, int n, boolean s, Safety pr, boolean h, Color c, int xH, int yH, int ss)
 		{
 		player = p;
-		loc = l; 
+		loc = ss; 
 		start = s;
 		protection = pr; 
 		home = h;

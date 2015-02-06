@@ -219,18 +219,18 @@ public class GameBoard extends Canvas
 			for(int z=0; z<4; z++)
 				{
 				Pawn p = x.get(z);
-				if(p.getLoc() >0)
+				if(p.isStart())
+					{
+					graphics.setColor(Color.blue);
+					graphics.fillOval(p.getxHome(), p.getyHome(), 45, 45);
+					}
+				else
 					{
 					graphics.setColor(p.getColor());
 					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
 					graphics.setColor(Color.black); 
 					graphics.setFont(new  Font("Serif", Font.BOLD, 14));
 					graphics.drawString(String.valueOf(p.getpNum()), spaces.get(p.getLoc()).getxC()+19, spaces.get(p.getLoc()).getyC()+27); 
-					}
-				else
-					{
-					graphics.setColor(Color.blue);
-					graphics.fillOval(p.getxHome(), p.getyHome(), 45, 45);
 					}
 				}
 			}
@@ -299,5 +299,4 @@ public class GameBoard extends Canvas
 			spaces.get(i).setyC(675-((i-43)*45));
 			}
 		}
-	
 	}
