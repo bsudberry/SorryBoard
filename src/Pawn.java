@@ -7,7 +7,7 @@ public class Pawn implements Safety
 	private int loc; 
 	private boolean start; 
 	protected Safety protection; 
-	private boolean home; 
+	private boolean home;  
 	private Color color;
 	private int xHome; 
 	private int yHome; 

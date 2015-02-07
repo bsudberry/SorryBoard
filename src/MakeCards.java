@@ -9,7 +9,7 @@ public class MakeCards
 		for(int i=0; i<1; i++)
 			{
 			deck.add(new Card("logo.jpg", 0, false, true, false, false, false, false, false));
-			}
+			} 
 		for(int i=0; i<1; i++)
 			{
 			deck.add(new Card("SorryCard.jpg", 0, false, true, true, false, false, false, false));
@@ -34,7 +34,7 @@ public class MakeCards
 			{
 			deck.add(new Card("Five.jpg", 5, false, false, false , false, false, false, true));
 			}
-		for(int i=0; i<100; i++)
+		for(int i=0; i<1; i++)
 			{
 			deck.add(new Card("Seven.jpg", 7, true, false, false , false, false, false,false ));
 			}

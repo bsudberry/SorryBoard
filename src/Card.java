@@ -8,7 +8,7 @@ public class Card
 	private boolean sorry; 
 	private boolean drawAgain; 
 	private boolean backward; 
-	private boolean switchSpots; 
+	private boolean switchSpots;  
 	private boolean isNormal; 
 	
 	public boolean isNormal()

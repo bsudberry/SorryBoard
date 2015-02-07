@@ -27,19 +27,18 @@ public class GameBoard extends Canvas
 	static JLabel label = new JLabel(); 
 	static  JButton button = new JButton("Draw Card");
 	static int playerCounter=4; 
-	static int labelCounter=0; 
+	static int labelCounter=0;  
 	
 	public static void makeBoard()
 		{
 	    JFrame frame = new JFrame();
 	    JPanel panel = new JPanel(); 
-	    frame.setSize(700, 800);
+	    frame.setSize(675, 740);
 	    frame.setLayout(new BorderLayout());
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    panel.add(label, BorderLayout.NORTH);
 	    panel.add(button, BorderLayout.SOUTH);
-	  
-		
+	    label.setText("Player 1: "); 
 		 GameBoard.button.addActionListener(new ActionListener()
 		    	{
 		    	public void actionPerformed(ActionEvent e)

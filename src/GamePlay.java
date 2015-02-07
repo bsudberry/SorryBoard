@@ -52,21 +52,25 @@ public class GamePlay
 			player.clear(); 
 			if((double) counter%4==0)
 				{
+				GameBoard.label.setText("Player 1: ");
 				player = allPlayers.get(3);
 				index = 3;
 				}
 			else if((double) counter%4==3)
 				{
+				GameBoard.label.setText("Player 4: ");
 				player = allPlayers.get(2);
 				index = 2;
 				}
 			else if((double) counter%4==2)
 				{
+				GameBoard.label.setText("Player 3: ");
 				player = allPlayers.get(1);
 				 index = 1;
 				}
 			else if((double)counter%4==1)
 				{
+				GameBoard.label.setText("Player 2: ");
 				player = allPlayers.get(0);
 				index=0;
 				}
@@ -80,45 +84,106 @@ public class GamePlay
 				}
 			else if(x.getFileName().equals("One.jpg"))
 				{
-				choosePawn(player, x);
+				String [] choices = {"Move from Start!", "No I will just move foward"}; 
+				int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "This card will move you from start. Would you like to move from start?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, choices, choices[0]);
+				if(pawnChosen == 0)
+					{
+					moveFromStart(player, x);
+					}
+				else
+					{
+					choosePawn(player, x);
+					}
 				}
 			else if(x.getFileName().equals("Two.jpg"))
 				{
-				choosePawn(player, x);
+				String [] choices = {"Move from Start!", "No I will just move foward"}; 
+				int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "This card will move you from start. Would you like to move from start?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, choices, choices[0]);
+				if(pawnChosen == 0)
+					{
+					moveFromStart(player, x);
+					}
+				else
+					{
+					choosePawn(player, x);
+					}
+				GameBoard.canvas.repaint(); 
 				}
-			else if(x.getFileName().equals("Three.jpg"))
+			else
+			{
+			for(int i=0; i<4; i++)
 				{
-				choosePawn(player, x);
+				int counterTimes = 0;
+				
+				if(player.get(i).isStart()==false)
+					{
+					if(x.getFileName().equals("Three.jpg"))
+						{
+						choosePawn(player, x);
+						break;
+						}
+					else if(x.getFileName().equals("Four.jpg"))
+						{
+						moveBackward(4, player); 
+						break;
+						}
+					else if(x.getFileName().equals("Five.jpg"))
+						{
+						choosePawn(player, x);
+						break;
+						}
+					else if(x.getFileName().equals("Seven.jpg"))
+						{
+						splitPawns(player, index);
+						break;
+						}
+					else if(x.getFileName().equals("Eight.jpg"))
+						{
+						choosePawn(player, x);
+						break;
+						}
+					else if(x.getFileName().equals("Ten.jpg"))
+						{
+						String[] choices = {"Move backward 1", "Move foward ten"}; 
+						int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, choices, choices[0]);
+						if(pawnChosen == 0)
+							{
+							moveBackward(1, player);
+							}
+						else
+							{
+							choosePawn(player, x);
+							}
+						break;
+						}
+					else if(x.getFileName().equals("Eleven.jpg"))
+						{
+						choosePawn(player, x);
+						break;
+						}
+					else if(x.getFileName().equals("Twelve.jpg"))
+						{
+						choosePawn(player, x);
+						break;
+						}
+					else
+						{
+						
+						}
+					}
+				else if(counterTimes==3)
+					{
+					String [] okay = {"Okay"}; 
+					BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
+					ImageIcon pawn = new ImageIcon(pawnImage);
+					int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, okay, okay[0]);
+					}
+				else
+					{
+					counterTimes++;
+					}
 				}
-			else if(x.getFileName().equals("Four.jpg"))
-				{
-				choosePawn(player, x);
-				}
-			else if(x.getFileName().equals("Five.jpg"))
-				{
-				choosePawn(player, x);
-				}
-			else if(x.getFileName().equals("Seven.jpg"))
-				{
-				splitPawns(player, index);
-				}
-			else if(x.getFileName().equals("Eight.jpg"))
-				{
-				choosePawn(player, x);
-				}
-			else if(x.getFileName().equals("Ten.jpg"))
-				{
-				choosePawn(player, x);
-				}
-			else if(x.getFileName().equals("Eleven.jpg"))
-				{
-				choosePawn(player, x);
-				}
-			else if(x.getFileName().equals("Twelve.jpg"))
-				{
-				choosePawn(player, x);
-				}
-			GameBoard.canvas.repaint();
+			}
 	}
 		
 	public static int choosePawn(ArrayList<Pawn> x, Card card) throws IOException
@@ -130,7 +195,7 @@ public class GamePlay
 			}
 		BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
 		ImageIcon pawn = new ImageIcon(pawnImage);
-		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Initial dealing", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
+		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Player "+ x.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
 		
 		if((x.get(pawnChosen).getLoc() + card.getValue()) >57)
 				{
@@ -142,7 +207,45 @@ public class GamePlay
 				x.get(pawnChosen).setStart(false);
 				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue()); 
 				}
+		GameBoard.canvas.repaint(); 
 		return pawnChosen;
+		}
+	 
+	public static void moveBackward(int value, ArrayList<Pawn> player) throws IOException
+		{
+		Object [] pawnsArray = new Object [player.size()];
+		for(int i=0; i<4; i++)
+			{
+			pawnsArray[i] = player.get(i).getpNum();
+			}
+		BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
+		ImageIcon pawn = new ImageIcon(pawnImage);
+		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move backward " + value + "?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
+		if((player.get(pawnChosen).getLoc() - value) < 0)
+			{
+			player.get(pawnChosen).setStart(false);
+			player.get(pawnChosen).setLoc(player.get(pawnChosen).getLoc() - value + 58); 
+			}
+		else
+			{
+			player.get(pawnChosen).setStart(false);
+			player.get(pawnChosen).setLoc(player.get(pawnChosen).getLoc() - value); 
+			}
+		GameBoard.canvas.repaint(); 
+		}
+	
+	public static void moveFromStart(ArrayList<Pawn> x, Card card) throws IOException
+		{
+		Object [] pawnsArray = new Object [x.size()];
+		for(int i=0; i<4; i++)
+			{
+			pawnsArray[i] = x.get(i).getpNum();
+			}
+		BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
+		ImageIcon pawn = new ImageIcon(pawnImage);
+		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Player "+ x.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
+		x.get(pawnChosen).setStart(false);
+		GameBoard.canvas.repaint(); 
 		}
 	
 	public static void splitPawns(ArrayList<Pawn>player, int index) throws IOException
@@ -184,12 +287,16 @@ public class GamePlay
 					choosePawn.dispose();
 					}
 			});
+		return;
 		}
 	
 	public static void setSplitLocations(int n,  int y, ArrayList<Pawn> m, int index1)
 		{
 		int location = m.get(n).getLoc();
-		m.get(n).setLoc(location + y); 
+		System.out.println(y);
+		System.out.println(m.get(n).getLoc());
+		m.get(n).setLoc(m.get(n).getLoc() + y); 
+		System.out.println(m.get(n).getLoc());
 		if((m.get(n).getLoc() +y) >57)
 			{
 			m.get(n).setStart(false);
@@ -202,7 +309,9 @@ public class GamePlay
 			}
 		allPlayers.set(index1,m);
 		GameBoard.canvas.repaint();
+		return; 
 		}
+
 	
 	}
 	
