@@ -36,7 +36,6 @@ public class GamePlay
 		{
 		MakeCards.makeCards();
 		PawnManager.makePawns();
-		MakeCards.makeCards();
 		GameBoard.makeSpots();
 		allPlayers.add(PawnManager.p1Pawns);
 		allPlayers.add(PawnManager.p2Pawns);
