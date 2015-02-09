@@ -271,7 +271,7 @@ public class GameBoard extends Canvas
 		{
 		for(int i=1; i<58; i++)
 			{
-			spaces.add(new BoardSpace(i, 0, 0, 45, 45));
+			spaces.add(new BoardSpace(i, 0, 0, 45, 45, false, null));
 			}
 		
 		for(int i=0; i<15; i++)

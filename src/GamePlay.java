@@ -195,16 +195,37 @@ public class GamePlay
 		BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
 		ImageIcon pawn = new ImageIcon(pawnImage);
 		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Player "+ x.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
-		
+		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setOccupied(false);
+		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(null);
 		if((x.get(pawnChosen).getLoc() + card.getValue()) >57)
 				{
 				x.get(pawnChosen).setStart(false);
-				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue() -58); 
+				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue() -58);
+				if(GameBoard.spaces.get(x.get(pawnChosen).getLoc()).isOccupied() == false)
+					{
+					GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setOccupied(true);
+					GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(x.get(pawnChosen)); 
+					}
+				else
+					{
+					GameBoard.spaces.get(x.get(pawnChosen).getLoc()).getPawn().setStart(true);
+					GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(x.get(pawnChosen)); 
+					}
 				}
 		else
 				{
 				x.get(pawnChosen).setStart(false);
 				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue()); 
+				if(GameBoard.spaces.get(x.get(pawnChosen).getLoc()).isOccupied() == false)
+				{
+				GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setOccupied(true);
+				GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(x.get(pawnChosen)); 
+				}
+				else
+					{
+					GameBoard.spaces.get(x.get(pawnChosen).getLoc()).getPawn().setStart(true);
+					GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(x.get(pawnChosen)); 
+					}
 				}
 		GameBoard.canvas.repaint(); 
 		return pawnChosen;
@@ -220,15 +241,37 @@ public class GamePlay
 		BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
 		ImageIcon pawn = new ImageIcon(pawnImage);
 		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move backward " + value + "?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
+		GameBoard.spaces.get(player.get(pawnChosen).getLoc()).setOccupied(false);
+		GameBoard.spaces.get(player.get(pawnChosen).getLoc()).setPawn(null);
 		if((player.get(pawnChosen).getLoc() - value) < 0)
 			{
 			player.get(pawnChosen).setStart(false);
 			player.get(pawnChosen).setLoc(player.get(pawnChosen).getLoc() - value + 58); 
+			if(GameBoard.spaces.get(player.get(pawnChosen).getLoc()).isOccupied() == false)
+				{
+				GameBoard.spaces.get(player.get(pawnChosen).getLoc()).setOccupied(true);
+				GameBoard.spaces.get(player.get(pawnChosen).getLoc()).setPawn(player.get(pawnChosen)); 
+				}
+			else
+				{
+				GameBoard.spaces.get(player.get(pawnChosen).getLoc()).getPawn().setStart(true);
+				GameBoard.spaces.get(player.get(pawnChosen).getLoc()).setPawn(player.get(pawnChosen)); 
+				}
 			}
 		else
 			{
 			player.get(pawnChosen).setStart(false);
 			player.get(pawnChosen).setLoc(player.get(pawnChosen).getLoc() - value); 
+			if(GameBoard.spaces.get(player.get(pawnChosen).getLoc()).isOccupied() == false)
+				{
+				GameBoard.spaces.get(player.get(pawnChosen).getLoc()).setOccupied(true);
+				GameBoard.spaces.get(player.get(pawnChosen).getLoc()).setPawn(player.get(pawnChosen)); 
+				}
+			else
+				{
+				GameBoard.spaces.get(player.get(pawnChosen).getLoc()).getPawn().setStart(true);
+				GameBoard.spaces.get(player.get(pawnChosen).getLoc()).setPawn(player.get(pawnChosen)); 
+				}
 			}
 		GameBoard.canvas.repaint(); 
 		}
@@ -243,7 +286,19 @@ public class GamePlay
 		BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
 		ImageIcon pawn = new ImageIcon(pawnImage);
 		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Player "+ x.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
+		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setOccupied(false);
+		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(null);
 		x.get(pawnChosen).setStart(false);
+		if(GameBoard.spaces.get(x.get(pawnChosen).getLoc()).isOccupied() == false)
+		{
+		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setOccupied(true);
+		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(x.get(pawnChosen)); 
+		}
+		else
+			{
+			GameBoard.spaces.get(x.get(pawnChosen).getLoc()).getPawn().setStart(true);
+			GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(x.get(pawnChosen)); 
+			}
 		GameBoard.canvas.repaint(); 
 		}
 	

@@ -19,10 +19,6 @@ public class PawnManager
 			p3Pawns.add(new Pawn(3, 0, (i+1),true, new NotSafe(), false, purple,450,565,34));
 			p4Pawns.add(new Pawn(4, 0, (i+1),true, new NotSafe(), false, Color.green,70,455,48));
 			}
-//		p1Pawns.get(0).setLoc(2); 
-//		p3Pawns.get(1).setLoc(37);
-//		p2Pawns.get(2).setLoc(12); 
-//		p4Pawns.get(3).setLoc(39);
 		
 		} 
 	
