@@ -28,7 +28,7 @@ public class GamePlay
 	static String labelWords; 
 	static JFrame choosePawn = new JFrame();
 	static boolean gameOver = false;
-	static Object[] pawnChoices = {1,2,3,4};
+	static Object[] pawnChoices = {1,2,3,4,"No move possible"};
 	static ImageIcon pawn = new ImageIcon("pawn.jpg");
 	static ArrayList<ArrayList<Pawn>> allPlayers = new ArrayList<ArrayList<Pawn>>();
 	
@@ -79,7 +79,29 @@ public class GamePlay
 			
 			if(x.getFileName().equals("SorryCard.jpg"))
 				{
-				choosePawn(player, x);
+				int playerChosen = JOptionPane.showOptionDialog(choosePawn, "Which player would you like to bump back to start?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnChoices, pawnChoices[0]);
+				switch(playerChosen)
+					{
+					case 0: 
+						{
+						sorryMove(player, allPlayers.get(0)); 
+						break;
+						}
+					case 1:
+						{
+						sorryMove(player, allPlayers.get(1));
+						break;
+						}
+					case 2:
+						{
+						sorryMove(player, allPlayers.get(2)); 
+						break;
+						}
+					case 3: 
+						{
+						sorryMove(player, allPlayers.get(3)); 
+						}
+					}
 				}
 			else if(x.getFileName().equals("One.jpg"))
 				{
@@ -286,19 +308,37 @@ public class GamePlay
 		BufferedImage pawnImage = ImageIO.read(new File("pawn.jpg"));
 		ImageIcon pawn = new ImageIcon(pawnImage);
 		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Player "+ x.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
-		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setOccupied(false);
-		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(null);
 		x.get(pawnChosen).setStart(false);
-		if(GameBoard.spaces.get(x.get(pawnChosen).getLoc()).isOccupied() == false)
-		{
-		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setOccupied(true);
-		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(x.get(pawnChosen)); 
-		}
+		if(GameBoard.spaces.get(x.get(pawnChosen).getStartSpot()).isOccupied() == false)
+			{
+			x.get(pawnChosen).setLoc(x.get(pawnChosen).getStartSpot());
+			GameBoard.spaces.get(x.get(pawnChosen).getStartSpot()).setOccupied(true);
+			GameBoard.spaces.get(x.get(pawnChosen).getStartSpot()).setPawn(x.get(pawnChosen)); 
+			}
 		else
 			{
-			GameBoard.spaces.get(x.get(pawnChosen).getLoc()).getPawn().setStart(true);
+			GameBoard.spaces.get(x.get(pawnChosen).getStartSpot()).getPawn().setStart(true);
+			GameBoard.spaces.get(x.get(pawnChosen).getStartSpot()).getPawn().setLoc(GameBoard.spaces.get(x.get(pawnChosen).getStartSpot()).getPawn().getStartSpot());
 			GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(x.get(pawnChosen)); 
 			}
+		GameBoard.canvas.repaint(); 
+		}
+	
+	public static void sorryMove(ArrayList<Pawn> player, ArrayList<Pawn> pawnToBump)
+		{
+		Object[] pawnChoices1 = {1,2,3,4, "No Move Possible"};
+		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to bump back to start?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnChoices1, pawnChoices1[0]);
+		if(pawnChosen==4)
+			{
+			return;
+			}
+		int location = pawnToBump.get(pawnChosen).getLoc(); 
+		int yourPawn = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move from start?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnChoices, pawnChoices[0]);
+		GameBoard.spaces.get(location).setPawn(player.get(yourPawn));
+		pawnToBump.get(pawnChosen).setLoc(pawnToBump.get(pawnChosen).getStartSpot());
+		pawnToBump.get(pawnChosen).setStart(true);
+		player.get(yourPawn).setStart(false);
+		player.get(yourPawn).setLoc(location);
 		GameBoard.canvas.repaint(); 
 		}
 	
@@ -306,7 +346,6 @@ public class GamePlay
 		{
 		final int iN = index;
 		final ArrayList<Pawn> l = new ArrayList<Pawn>(player); 
-		Object pawnsChosen [] = new Object[4];
 		Object [] pawnsArray = new Object [player.size()];
 		String [] spots = {"Move 1", " Move 2", "Move 3", "Move 4", "Move 5", "Move 6","Move 7"}; 
 		for(int i=0; i<4; i++)
