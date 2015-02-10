@@ -118,6 +118,7 @@ public class GamePlay
 				}
 			else if(x.getFileName().equals("Two.jpg"))
 				{
+				GameBoard.playerCounter--; 
 				String [] choices = {"Move from Start!", "No I will just move foward"}; 
 				int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "This card will move you from start. Would you like to move from start?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, choices, choices[0]);
 				if(pawnChosen == 0)
@@ -219,6 +220,15 @@ public class GamePlay
 		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to move? ", "Player "+ x.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnsArray, pawnsArray[0]);
 		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setOccupied(false);
 		GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(null);
+		for(int i=0; i<card.getValue(); i++)
+			{
+			if(x.get(pawnChosen).getLoc() + i  == x.get(pawnChosen).getStartSpot() -2)
+				{
+				x.get(pawnChosen).setLoc(x.get(pawnChosen).getHomeSpots()[i]);
+				System.out.println(x.get(pawnChosen).getLoc());
+				return 0;
+				}
+			}
 		if((x.get(pawnChosen).getLoc() + card.getValue()) >57)
 				{
 				x.get(pawnChosen).setStart(false);
@@ -239,10 +249,10 @@ public class GamePlay
 				x.get(pawnChosen).setStart(false);
 				x.get(pawnChosen).setLoc(x.get(pawnChosen).getLoc() + card.getValue()); 
 				if(GameBoard.spaces.get(x.get(pawnChosen).getLoc()).isOccupied() == false)
-				{
-				GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setOccupied(true);
-				GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(x.get(pawnChosen)); 
-				}
+					{
+					GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setOccupied(true);
+					GameBoard.spaces.get(x.get(pawnChosen).getLoc()).setPawn(x.get(pawnChosen)); 
+					}
 				else
 					{
 					GameBoard.spaces.get(x.get(pawnChosen).getLoc()).getPawn().setStart(true);
@@ -405,6 +415,23 @@ public class GamePlay
 		return; 
 		}
 
-	
+	public static void switchSpots(ArrayList<Pawn> player, ArrayList<Pawn> pawnToBump)
+		{
+		Object[] pawnChoices1 = {1,2,3,4, "No Move Possible"};
+		int pawnChosen = JOptionPane.showOptionDialog(choosePawn, "Which pawn do you want to switch with?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnChoices1, pawnChoices1[0]);
+		if(pawnChosen==4)
+			{
+			return;
+			}
+		int locationofBump = pawnToBump.get(pawnChosen).getLoc(); 
+		int yourPawn = JOptionPane.showOptionDialog(choosePawn, "Which pawn of YOURS do you want to switch with?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnChoices, pawnChoices[0]);
+		int locationofP = player.get(yourPawn).getLoc();
+		GameBoard.spaces.get(locationofP).setPawn(player.get(yourPawn));
+		pawnToBump.get(pawnChosen).setLoc(pawnToBump.get(pawnChosen).getStartSpot());
+		pawnToBump.get(pawnChosen).setStart(true);
+		player.get(yourPawn).setStart(false);
+		player.get(yourPawn).setLoc(location);
+		GameBoard.canvas.repaint(); 
+		}
 	}
 	

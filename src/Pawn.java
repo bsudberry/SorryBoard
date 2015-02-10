@@ -13,8 +13,19 @@ public class Pawn implements Safety
 	private int yHome; 
 	private int startSpot; 
 	private int pNum;
+	int [] homeSpots;
 	
-	public Pawn(int p, int l, int n, boolean s, Safety pr, boolean h, Color c, int xH, int yH, int ss)
+	public int[] getHomeSpots()
+		{
+		return homeSpots;
+		}
+
+	public void setHomeSpots(int[] homeSpots)
+		{
+		this.homeSpots = homeSpots;
+		}
+
+	public Pawn(int p, int l, int n, boolean s, Safety pr, boolean h, Color c, int xH, int yH, int ss, int[] hS)
 		{
 		player = p;
 		loc = ss; 
@@ -26,6 +37,7 @@ public class Pawn implements Safety
 		yHome = yH;
 		startSpot=ss;
 		pNum = n; 
+		homeSpots = hS; 
 		}
 
 	public int getpNum() {

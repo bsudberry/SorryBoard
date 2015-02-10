@@ -12,12 +12,17 @@ public class PawnManager
 	
 	public static void makePawns() 
 		{
+		int [] p1 ={78,79,80,81,82};
+		int [] p2 ={83,84,85,86,87};
+		int [] p3 ={88,89,90,91,91};
+		int [] p4 ={92,93,94,95,96};
+		
 		for(int i=0; i<4; i++)
 			{
-			p1Pawns.add(new Pawn(1, 0, (i+1), true, new NotSafe(), false, Color.red, 177, 67,4));
-			p2Pawns.add(new Pawn(2, 0, (i+1),true, new NotSafe(), false, Color.yellow, 565,180,19));
-			p3Pawns.add(new Pawn(3, 0, (i+1),true, new NotSafe(), false, purple,450,565,34));
-			p4Pawns.add(new Pawn(4, 0, (i+1),true, new NotSafe(), false, Color.green,70,455,48));
+			p1Pawns.add(new Pawn(1, 0, (i+1), true, new NotSafe(), false, Color.red, 177, 67,4, p1));
+			p2Pawns.add(new Pawn(2, 0, (i+1),true, new NotSafe(), false, Color.yellow, 565,180,19,p2));
+			p3Pawns.add(new Pawn(3, 0, (i+1),true, new NotSafe(), false, purple,450,565,34,p3));
+			p4Pawns.add(new Pawn(4, 0, (i+1),true, new NotSafe(), false, Color.green,70,455,48,p4));
 			}
 		
 		} 

@@ -297,5 +297,31 @@ public class GameBoard extends Canvas
 			spaces.get(i).setxC(0); 
 			spaces.get(i).setyC(675-((i-43)*45));
 			}
+		
+		
+		spaces.add(new BoardSpace(78, 90,45, 45,45, false, null));
+		spaces.add(new BoardSpace(79, 90,90, 45,45, false, null));
+		spaces.add(new BoardSpace(80, 90,135, 45,45, false, null));
+		spaces.add(new BoardSpace(103, 90,180, 45,45, false, null));
+		spaces.add(new BoardSpace(104, 90,225, 45,45, false, null));
+		
+		
+		spaces.add(new BoardSpace(200, 585,90, 45,45, false, null));
+		spaces.add(new BoardSpace(201, 540,90, 45,45, false, null));
+		spaces.add(new BoardSpace(202, 495, 90, 45,45, false, null));
+		spaces.add(new BoardSpace(203, 450, 90, 45,45, false, null));
+		spaces.add(new BoardSpace(204, 405, 90, 45,45, false, null));
+		
+		spaces.add(new BoardSpace(300, 540, 585, 45,45, false, null));
+		spaces.add(new BoardSpace(301, 540, 540, 45,45, false, null));
+		spaces.add(new BoardSpace(302, 540, 495, 45,45, false, null));
+		spaces.add(new BoardSpace(303, 540 , 450, 45,45, false, null));
+		spaces.add(new BoardSpace(404, 540, 405, 45,45, false, null));
+		
+		spaces.add(new BoardSpace(400, 45 ,540, 45,45, false, null));
+		spaces.add(new BoardSpace(401, 90,540, 45,45, false, null));
+		spaces.add(new BoardSpace(402, 135,540, 45,45, false, null));
+		spaces.add(new BoardSpace(403, 180,540, 45,45, false, null));
+		spaces.add(new BoardSpace(104, 225, 540, 45,45, false, null));
 		}
 	}
