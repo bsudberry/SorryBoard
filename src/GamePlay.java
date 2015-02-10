@@ -180,7 +180,29 @@ public class GamePlay
 						}
 					else if(x.getFileName().equals("Eleven.jpg"))
 						{
-						choosePawn(player, x);
+						int playerChosen = JOptionPane.showOptionDialog(choosePawn, "Which player would you like to bump back to start?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnChoices, pawnChoices[0]);
+						switch(playerChosen)
+							{
+							case 0: 
+								{
+								switchSpots(player, allPlayers.get(0)); 
+								break;
+								}
+							case 1:
+								{
+								switchSpots(player, allPlayers.get(1));
+								break;
+								}
+							case 2:
+								{
+								switchSpots(player, allPlayers.get(2)); 
+								break;
+								}
+							case 3: 
+								{
+								switchSpots(player, allPlayers.get(3)); 
+								}
+							}
 						break;
 						}
 					else if(x.getFileName().equals("Twelve.jpg"))
@@ -396,10 +418,7 @@ public class GamePlay
 	public static void setSplitLocations(int n,  int y, ArrayList<Pawn> m, int index1)
 		{
 		int location = m.get(n).getLoc();
-		System.out.println(y);
-		System.out.println(m.get(n).getLoc());
 		m.get(n).setLoc(m.get(n).getLoc() + y); 
-		System.out.println(m.get(n).getLoc());
 		if((m.get(n).getLoc() +y) >57)
 			{
 			m.get(n).setStart(false);
@@ -427,11 +446,10 @@ public class GamePlay
 		int yourPawn = JOptionPane.showOptionDialog(choosePawn, "Which pawn of YOURS do you want to switch with?", "Player "+ player.get(0).getPlayer(), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, pawn, pawnChoices, pawnChoices[0]);
 		int locationofP = player.get(yourPawn).getLoc();
 		GameBoard.spaces.get(locationofP).setPawn(player.get(yourPawn));
-		pawnToBump.get(pawnChosen).setLoc(pawnToBump.get(pawnChosen).getStartSpot());
-		pawnToBump.get(pawnChosen).setStart(true);
-		player.get(yourPawn).setStart(false);
-		player.get(yourPawn).setLoc(location);
-		GameBoard.canvas.repaint(); 
+		GameBoard.spaces.get(locationofBump).setPawn(pawnToBump.get(pawnChosen)); 
+		player.get(yourPawn).setLoc(locationofBump); 
+		pawnToBump.get(pawnChosen).setLoc(locationofP); 
+		GameBoard.canvas.repaint();
 		}
 	}
 	

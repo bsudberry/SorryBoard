@@ -31,6 +31,7 @@ public class GameBoard extends Canvas
 	
 	public static void makeBoard()
 		{
+		System.err.println("HALLO");
 	    JFrame frame = new JFrame();
 	    JPanel panel = new JPanel(); 
 	    frame.setSize(675, 740);
