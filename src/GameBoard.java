@@ -226,6 +226,9 @@ public class GameBoard extends Canvas
 					}
 				else
 					{
+					graphics.setColor(Color.black);
+					graphics.drawOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
+					
 					graphics.setColor(p.getColor());
 					graphics.fillOval(spaces.get(p.getLoc()).getxC(), spaces.get(p.getLoc()).getyC(), 45, 45);
 					graphics.setColor(Color.black); 
@@ -324,5 +327,6 @@ public class GameBoard extends Canvas
 		spaces.add(new BoardSpace(402, 135,540, 45,45, false, null));
 		spaces.add(new BoardSpace(403, 180,540, 45,45, false, null));
 		spaces.add(new BoardSpace(104, 225, 540, 45,45, false, null));
+		System.out.println(spaces.size() + " Hi");
 		}
 	}
