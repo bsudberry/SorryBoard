@@ -31,7 +31,6 @@ public class GameBoard extends Canvas
 	
 	public static void makeBoard()
 		{
-		System.err.println("HALLO");
 	    JFrame frame = new JFrame();
 	    JPanel panel = new JPanel(); 
 	    frame.setSize(675, 740);
@@ -327,6 +326,5 @@ public class GameBoard extends Canvas
 		spaces.add(new BoardSpace(402, 135,540, 45,45, false, null));
 		spaces.add(new BoardSpace(403, 180,540, 45,45, false, null));
 		spaces.add(new BoardSpace(104, 225, 540, 45,45, false, null));
-		System.out.println(spaces.size() + " Hi");
 		}
 	}

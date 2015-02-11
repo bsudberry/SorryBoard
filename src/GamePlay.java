@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -391,7 +392,7 @@ public class GamePlay
 		final int iN = index;
 		final ArrayList<Pawn> l = new ArrayList<Pawn>(player); 
 		Object [] pawnsArray = new Object [player.size()];
-		String [] spots = {"Move 1", " Move 2", "Move 3", "Move 4", "Move 5", "Move 6","Move 7"}; 
+		String [] spots = {"Move 0", "Move 1", " Move 2", "Move 3", "Move 4", "Move 5", "Move 6","Move 7"}; 
 		for(int i=0; i<4; i++)
 			{
 			pawnsArray[i] ="Pawn " + player.get(i).getpNum();
@@ -419,8 +420,8 @@ public class GamePlay
 			{
 				public void actionPerformed(ActionEvent arg0)
 					{
-					setSplitLocations(choosePawn1.getSelectedIndex(),chooseSpots1.getSelectedIndex()+1,l,iN);
-					setSplitLocations(choosePawn2.getSelectedIndex(),chooseSpots2.getSelectedIndex()+1,l,iN);
+					setSplitLocations(choosePawn1.getSelectedIndex(),chooseSpots1.getSelectedIndex(),l,iN);
+					setSplitLocations(choosePawn2.getSelectedIndex(),chooseSpots2.getSelectedIndex(),l,iN);
 					choosePawn.dispose();
 					}
 			});
@@ -429,14 +430,15 @@ public class GamePlay
 	
 	public static void setSplitLocations(int n,  int y, ArrayList<Pawn> m, int index1)
 		{
+		
 		int location = m.get(n).getLoc();
-		m.get(n).setLoc(m.get(n).getLoc() + y); 
+		m.get(n).setLoc(location+(y-1)); 
 		if((m.get(n).getLoc() +y) >57)
 			{
 			m.get(n).setStart(false);
 			m.get(n).setLoc(m.get(n).getLoc() + y -58); 
 			}
-	else
+		else
 			{
 			m.get(n).setStart(false);
 			m.get(n).setLoc(m.get(n).getLoc() +y); 

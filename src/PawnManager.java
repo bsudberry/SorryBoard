@@ -19,7 +19,7 @@ public class PawnManager
 		
 		for(int i=0; i<4; i++)
 			{
-			p1Pawns.add(new Pawn(1, 0, (i+1), true, new NotSafe(), false, Color.red, 177, 67,4, p1));
+			p1Pawns.add(new Pawn(1, 0, (i+1), false, new NotSafe(), false, Color.red, 177, 67,4, p1));
 			p2Pawns.add(new Pawn(2, 0, (i+1),true, new NotSafe(), false, Color.yellow, 565,180,19,p2));
 			p3Pawns.add(new Pawn(3, 0, (i+1),true, new NotSafe(), false, purple,450,565,34,p3));
 			p4Pawns.add(new Pawn(4, 0, (i+1),true, new NotSafe(), false, Color.green,70,455,48,p4));
