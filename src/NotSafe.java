@@ -6,3 +6,4 @@ public class NotSafe implements Safety
 		
 		}
 }
+ 

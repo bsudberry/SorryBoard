@@ -6,3 +6,4 @@ public class Safe implements Safety
 			
 		}
 }
+ 

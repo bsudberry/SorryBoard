@@ -39,7 +39,7 @@ public class GameBoard extends Canvas
 	    panel.add(label, BorderLayout.NORTH);
 	    panel.add(button, BorderLayout.SOUTH);
 	    label.setText("Player 1: "); 
-		 GameBoard.button.addActionListener(new ActionListener()
+		GameBoard.button.addActionListener(new ActionListener()
 		    	{
 		    	public void actionPerformed(ActionEvent e)
 		    			{
@@ -49,7 +49,7 @@ public class GameBoard extends Canvas
 							GameBoard.cardIndex = GameBoard.chooseCard();
 							GameBoard.canvas.repaint();
 							GamePlay.makeMove(playerCounter, MakeCards.deck.get(GameBoard.cardIndex));
-							} catch (IOException e1)
+					 		} catch (IOException e1)
 							{
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

@@ -219,7 +219,7 @@ public class GamePlay
 					else
 						{
 						
-						}
+						} 
 					}
 				else if(counterTimes==3)
 					{

@@ -10,7 +10,7 @@ public class MakeCards
 			{
 			deck.add(new Card("logo.jpg", 0, false, true, false, false, false, false, false));
 			} 
-		for(int i=0; i<1; i++)
+		for(int i=0; i<1; i++) 
 			{
 			deck.add(new Card("SorryCard.jpg", 0, false, true, true, false, false, false, false));
 			}

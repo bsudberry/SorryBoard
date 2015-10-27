@@ -13,7 +13,7 @@ public class PawnManager
 	public static void makePawns() 
 		{
 		int [] p1 ={57,58,59,60,61};
-		int [] p2 ={62,63,64,65,66};
+		int [] p2 ={62,63,64,65,66}; 
 		int [] p3 ={67,68,69,70,71};
 		int [] p4 ={72,73,74,75,76};
 		
@@ -24,10 +24,7 @@ public class PawnManager
 			p3Pawns.add(new Pawn(3, 0, (i+1),true, new NotSafe(), false, purple,450,565,34,p3));
 			p4Pawns.add(new Pawn(4, 0, (i+1),true, new NotSafe(), false, Color.green,70,455,48,p4));
 			}
-		p1Pawns.get(0).setLoc(0);
-		p1Pawns.get(1).setLoc(15);
-		p1Pawns.get(2).setLoc(50);
-		p1Pawns.get(3).setLoc(45);
+
 		} 
 	
 	}

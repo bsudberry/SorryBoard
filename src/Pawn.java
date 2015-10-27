@@ -11,7 +11,7 @@ public class Pawn implements Safety
 	private Color color;
 	private int xHome; 
 	private int yHome; 
-	private int startSpot; 
+	private int startSpot;  
 	private int pNum;
 	int [] homeSpots;
 	

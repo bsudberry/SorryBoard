@@ -9,7 +9,7 @@ public class Card
 	private boolean drawAgain; 
 	private boolean backward; 
 	private boolean switchSpots;  
-	private boolean isNormal; 
+	private boolean isNormal;  
 	
 	public boolean isNormal()
 		{
